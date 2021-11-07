@@ -51,9 +51,8 @@ int main()
 
 int Menu(Position head)
 {
-    int a=0, birthYear=0;
-    char name[MAX_SIZE]={0}, surname[MAX_SIZE]={0};
-
+    int a=0;
+    
     printf("Odaberite:"
             "\n\t1 za umetanje elementa na pocetak liste"
             "\n\t2 za umetanje elementa na kraj lise"
