@@ -14,6 +14,8 @@ typedef struct _person
     Position next;
 }Person;
 
+int Menu(Position head);
+int PersonInformation(Position head, int choice);
 int PrependList(Position head, char name[], char surname[], int birthYear);
 int InsertAfter(Position p, Position Newperson);
 int PrintList(Position first);
@@ -33,40 +35,119 @@ int main()
 {
     Person head={.name={0}, .surname={0}, .birthYear=0, .next=NULL};
     Position p=NULL;
-    int counter;
+    int choice=0;
 
     p=&head;
 
-    PrependList(p, "Ivan", "Marasovic", 2001);
-    PrintList(p->next);
-    puts("");
+    do
+    {
+        choice = Menu(p);
 
-    PrependList(p, "Mate", "Matic", 2000);
-    AppendList(p, "Jure", "Juric", 2006);
-    PrintList(p->next);
-    puts("");
-
-    Delete(p, "Marasovic");
-    PrintList(p->next);
-    puts("");
-
-    AddAfter(p->next, "Juric", "Ivan", "Marasovic", 2001);
-    PrintList(p->next);
-    puts("");
-
-    AddBefore(p, "Marasovic", "Ante", "Antic", 1999);
-    PrintList(p->next);
-    puts("");
-
-    Sort(p);
-    PrintList(p->next);
-    puts("");
-
-    WriteFile(p->next, "linked_list.txt");
-    ReadFile("linked_list.txt");
+    }while(choice!=0);
 
     return 0;
 
+}
+
+int Menu(Position head)
+{
+    int a=0, birthYear=0;
+    char name[MAX_SIZE]={0}, surname[MAX_SIZE]={0};
+
+    printf("Odaberite:"
+            "\n\t1 za umetanje elementa na pocetak liste"
+            "\n\t2 za umetanje elementa na kraj lise"
+            "\n\t3 za brisanje zeljenog clana"
+            "\n\t4 za umetanje ispred zeljenog clana"
+            "\n\t5 za umetanje iza zeljenog clana"
+            "\n\t6 ako zelite vidjeti svoju listu"
+            "\n\t7 ako zelite sortirati listu"
+            "\n\t8 ako zelite upisati listu u datoteku"
+            "\n\t9 ako zelite procitati listu iz datoteke"
+            "\n\t0 za izlazak iz programa\n");
+    scanf("%d", &a);
+
+    if(a<0 || a>9)
+    {
+        printf("Unijeli ste nepostojecu opciju. Molimo ponovite unos.\n");
+        return -1;
+    }
+
+    a = PersonInformation(head, a);
+
+    return a;
+}
+
+int PersonInformation(Position head, int choice)
+{
+    int birthYear=0;
+    char name[MAX_SIZE]={0}, surname[MAX_SIZE]={0}, reference_surname[MAX_SIZE]={0};
+
+    if(choice==0)
+        return 0;
+
+    switch (choice)
+    {
+    case 1:
+        printf("Unesi ime osobe: ");
+        scanf(" %s", name);
+        printf("Unesi prezime osobe: ");
+        scanf(" %s", surname);
+        printf("Unesi godinu rodenja osobe: ");
+        scanf(" %d", &birthYear);
+        PrependList(head, name, surname, birthYear);
+        return 1;
+    case 2:
+        printf("Unesi ime osobe: ");
+        scanf(" %s", name);
+        printf("Unesi prezime osobe: ");
+        scanf(" %s", surname);
+        printf("Unesi godinu rodenja osobe: ");
+        scanf(" %d", &birthYear);
+        AppendList(head, name, surname, birthYear);
+        return 2;
+    case 3:
+        printf("Unesi prezime osobe koju zelis izbrisati:");
+        scanf(" %s", surname);
+        Delete(head, surname);
+        return 3;
+    case 4:
+        printf("Unesi prezime osobe ispred koje zelis unijeti element:");
+        scanf(" %s", reference_surname);
+        printf("Unesi ime osobe: ");
+        scanf(" %s", name);
+        printf("Unesi prezime osobe: ");
+        scanf(" %s", surname);
+        printf("Unesi godinu rodenja osobe: ");
+        scanf(" %d", &birthYear);
+        AddBefore(head, reference_surname, name, surname, birthYear);
+        return 4;
+    case 5:
+        printf("Unesi prezime osobe iza koje zelis unijeti element:");
+        scanf(" %s", reference_surname);
+        printf("Unesi ime osobe: ");
+        scanf(" %s", name);
+        printf("Unesi prezime osobe: ");
+        scanf(" %s", surname);
+        printf("Unesi godinu rodenja osobe: ");
+        scanf(" %d", &birthYear);
+        AddAfter(head, reference_surname, name, surname, birthYear);
+        return 5;
+    case 6:
+        PrintList(head->next);
+        return 6;
+    case 7:
+        Sort(head);
+        return 7;
+    case 8:
+        WriteFile(head->next, "linked_list.txt");
+        return 8;
+    case 9:
+        ReadFile("linked_list.txt");
+        return 9;
+    default:
+        break;
+    }
 }
 
 int PrependList(Position head, char name[], char surname[], int birthYear)
@@ -287,9 +368,8 @@ int ReadFile(char *fileName)
         return -1;
     }
 
-    while(!feof(file))
+    while(fgets(line, MAX_LINE, file))
     {
-        fgets(line, MAX_LINE, file);
         sscanf(line," %s %s %d", name, surname, &birthYear);
         printf("%s %s %d\n", name, surname, birthYear);
     }
