@@ -21,6 +21,7 @@ int PrintPoly(Position p);
 int DeleteAfter(Position p);
 int AddPoly(Position p1, Position p2, Position sum);
 int PolyProduct(Position p1, Position p2, Position product);
+int FreeMemory(Position p);
 
 int main()
 {
@@ -50,6 +51,11 @@ int main()
     printf("P1*P2 =");
     PrintPoly(pProduct->next);
     puts("");
+
+    FreeMemory(p1);
+    FreeMemory(p2);
+    FreeMemory(pSum);
+    FreeMemory(pProduct);
 
     return 0;
 }
@@ -251,6 +257,18 @@ int PolyProduct(Position p1, Position p2, Position product)
         }
         temp=p2;
         p1=p1->next;
+    }
+
+    return 0;
+}
+
+int FreeMemory(Position p)
+{
+    Position temp=p;
+
+    while(temp->next!=NULL)
+    {
+        DeleteAfter(temp);
     }
 
     return 0;
