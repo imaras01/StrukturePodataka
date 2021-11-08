@@ -16,6 +16,7 @@ typedef struct _person
 
 int Menu(Position head);
 int PersonInformation(Position head, int choice);
+int PersonInformationInput(char name[], char surname[], int* birthYear);
 int PrependList(Position head, char name[], char surname[], int birthYear);
 int InsertAfter(Position p, Position Newperson);
 int PrintList(Position first);
@@ -88,21 +89,11 @@ int PersonInformation(Position head, int choice)
     switch (choice)
     {
     case 1:
-        printf("Unesi ime osobe: ");
-        scanf(" %s", name);
-        printf("Unesi prezime osobe: ");
-        scanf(" %s", surname);
-        printf("Unesi godinu rodenja osobe: ");
-        scanf(" %d", &birthYear);
+        PersonInformationInput(name, surname, &birthYear);
         PrependList(head, name, surname, birthYear);
         return 1;
     case 2:
-        printf("Unesi ime osobe: ");
-        scanf(" %s", name);
-        printf("Unesi prezime osobe: ");
-        scanf(" %s", surname);
-        printf("Unesi godinu rodenja osobe: ");
-        scanf(" %d", &birthYear);
+        PersonInformationInput(name, surname, &birthYear);
         AppendList(head, name, surname, birthYear);
         return 2;
     case 3:
@@ -113,23 +104,13 @@ int PersonInformation(Position head, int choice)
     case 4:
         printf("Unesi prezime osobe ispred koje zelis unijeti element:");
         scanf(" %s", reference_surname);
-        printf("Unesi ime osobe: ");
-        scanf(" %s", name);
-        printf("Unesi prezime osobe: ");
-        scanf(" %s", surname);
-        printf("Unesi godinu rodenja osobe: ");
-        scanf(" %d", &birthYear);
+        PersonInformationInput(name, surname, &birthYear);
         AddBefore(head, reference_surname, name, surname, birthYear);
         return 4;
     case 5:
         printf("Unesi prezime osobe iza koje zelis unijeti element:");
         scanf(" %s", reference_surname);
-        printf("Unesi ime osobe: ");
-        scanf(" %s", name);
-        printf("Unesi prezime osobe: ");
-        scanf(" %s", surname);
-        printf("Unesi godinu rodenja osobe: ");
-        scanf(" %d", &birthYear);
+        PersonInformationInput(name, surname, &birthYear);
         AddAfter(head, reference_surname, name, surname, birthYear);
         return 5;
     case 6:
@@ -147,6 +128,17 @@ int PersonInformation(Position head, int choice)
     default:
         break;
     }
+}
+
+int PersonInformationInput(char name[], char surname[], int* birthYear)
+{
+    printf("Unesi ime osobe: ");
+    scanf(" %s", name);
+    printf("Unesi prezime osobe: ");
+    scanf(" %s", surname);        
+    printf("Unesi godinu rodenja osobe: ");
+    scanf(" %d", birthYear);
+    return 0;
 }
 
 int PrependList(Position head, char name[], char surname[], int birthYear)
