@@ -106,8 +106,12 @@ int StringToList(Position head, char buffer[])
             printf("There has been an error reading the file.");
             return 1;
         }
+        
+        if(coefficient!=0)
+            status=InsertInList(head, coefficient, exponent);
+        else    
+            status=0;
 
-        status=InsertInList(head, coefficient, exponent);
         if(status != 0)
         {
             return 1;
