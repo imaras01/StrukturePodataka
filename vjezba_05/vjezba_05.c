@@ -20,16 +20,22 @@ int ReadPostfix(Position head, char buffer[]);
 int DeleteAfter(Position head);
 int DeleteAll(Position head);
 int PerformOperation(Position head, char operator);
+int CheckStack(Position head);
 
 int main()
 {
     StackElement head={.number=0, .next=NULL};
     Position p=&head;
+    int status=0;
 
-    ReadFile(p, "postfix.txt");
-
-    printf("Postfix result is %lf", p->next->number);
-    DeleteAfter(p);
+    status=ReadFile(p, "postfix.txt");
+    if(status != 0)
+        return -1;
+    else
+    {
+        printf("Postfix result is %lf", p->next->number);
+        DeleteAfter(p);
+    }
 
     return 0;
 }
@@ -108,6 +114,13 @@ int ReadPostfix(Position head, char buffer[])
 
         currentBuffer+=NumOfBytes;
     }
+
+    if(CheckStack(head) != 1)
+    {
+        printf("Postfix error!");
+        return -1;
+    }
+
     return 0;
 }
 
@@ -201,8 +214,26 @@ int PerformOperation(Position head, char operator)
 
 int Pop(double* operand, Position head)
 {
+    if(head->next==NULL)
+    {
+        printf("Postfix error!");
+        return -1;
+    }
     *operand = head->next->number;
     DeleteAfter(head);
 
     return 0;
+}
+
+int CheckStack(Position head)
+{
+    int counter=0;
+
+    while(head->next!=NULL)
+    {
+        counter++;
+        head=head->next;
+    }
+
+    return counter;
 }
