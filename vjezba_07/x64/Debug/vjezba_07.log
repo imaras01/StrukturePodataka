@@ -1,0 +1,3 @@
+﻿  directories.c
+C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_07\directories.c(98,12): warning C4047: 'return': 'Position' differs in levels of indirection from 'int'
+  vjezba_07.vcxproj -> C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_07\x64\Debug\vjezba_07.exe
