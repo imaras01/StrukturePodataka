@@ -70,7 +70,14 @@ int MakeDirectory(Position current_directory)
 	Position LastDirectory = NULL;
 
 	printf("What is the name of the new file: ");
-	scanf(" %s", name);
+	scanf(" %[^\n]s", name);
+
+	if (NameCheck(current_directory->child, name))
+	{
+		printf("Directory with that name already exists.\n");
+		return 0;
+	}
+
 	NewDirectory = CreateNewDirectory(name);
 	if (!NewDirectory)
 		return -1;
@@ -95,7 +102,7 @@ Position CreateNewDirectory(char name[])
 	if (!NewDirectory)
 	{
 		printf("Couldn't allocate memory!");
-		return -1;
+		return NULL;
 	}
 
 	strcpy(NewDirectory->name, name);
@@ -129,8 +136,8 @@ Position ChangeDirectory(Position current_directory)
 	char name[MAX_NAME_SIZE] = { 0 };
 	Position temp = current_directory->child;
 
-	printf("What file do you want to go to: ");
-	scanf(" %s", name);
+	printf("What directory do you want to go to: ");
+	scanf(" %[^\n]s", name);
 
 	while (temp != NULL && strcmp(name, temp->name) != 0)
 	{
@@ -197,3 +204,16 @@ Position Pop(StackPosition head)
 	return head->next->directory;
 }
 
+int NameCheck(Position first, char name[])
+{
+	Position temp = first;
+
+	while (temp != NULL)
+	{
+		if (strcmp(name, temp->name) == 0)
+			return 1;
+		temp = temp->sibling;
+	}
+
+	return 0;
+}

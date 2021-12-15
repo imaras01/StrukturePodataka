@@ -31,5 +31,6 @@ int Push(StackPosition head, Position current_directory);
 Position Pop(StackPosition head);
 int StackInsert(StackPosition head, StackPosition new_element);
 int PrintDirectories(Position first);
+int NameCheck(Position first, char name[]);
 
 #endif 

@@ -9,7 +9,7 @@ int main()
 	Directory root = { .name = "C:", .child = NULL, .sibling = NULL };
 	Stack head = { .directory = NULL, .next = NULL };
 	int status = 0;
-
+	
 	Push(&head, &root);
 	
 	do
