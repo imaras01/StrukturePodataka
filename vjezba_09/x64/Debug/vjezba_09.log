@@ -1,0 +1,5 @@
+﻿  binary_tree.c
+C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_09\binary_tree.c(83,25): warning C4133: '=': incompatible types - from 'StackPosition' to 'Position'
+C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_09\binary_tree.c(117,20): warning C4133: '=': incompatible types - from 'Position' to 'StackPosition'
+C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_09\binary_tree.c(131,20): warning C4133: '=': incompatible types - from 'Position' to 'StackPosition'
+  vjezba_09.vcxproj -> C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_09\x64\Debug\vjezba_09.exe
