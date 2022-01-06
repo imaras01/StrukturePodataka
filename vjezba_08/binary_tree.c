@@ -6,6 +6,7 @@
 int Menu(Position root)
 {
 	Position NewElement = NULL;
+	Position status = NULL;
 	int choice = 0;
 	int number = 0;
 
@@ -18,9 +19,11 @@ int Menu(Position root)
 		case 1:
 			printf("Choose a number you want to insert:");
 			scanf("%d", &number);
+
 			NewElement = CreateNewElement(number);
 			if (!NewElement)
 				return -1;
+
 			root=Insert(root, NewElement);
 			break;
 
@@ -38,14 +41,17 @@ int Menu(Position root)
 			PrintPostorder(root);
 			puts("");
 			break;
+
 		case 5:
 			printf("What element do you want to find: ");
 			scanf("%d", &number);
-			root = FindElement(root, number);
-			if (!root)
+
+			status = FindElement(root, number);
+			if (!status)
 				printf("Your element doesn't exist.\n");
 			else
-				printf("Your element exists.\n");
+				printf("Your element exists and can be its adress is %p.\n", status);
+
 			break;
 
 		case 6:
@@ -81,10 +87,10 @@ Position Insert(Position root, Position NewElement)
 	if (root == NULL)
 		root = NewElement;
 
-	else if (root != NULL && NewElement->number < root->number)
+	else if (NewElement->number < root->number)
 		root->left = Insert(root->left, NewElement);
 
-	else if (root != NULL && NewElement->number > root->number)
+	else if (NewElement->number > root->number)
 		root->right = Insert(root->right, NewElement);
 
 	else
@@ -143,18 +149,18 @@ int PrintPostorder(Position root)
 	return 0;
 }
 
-int DeleteElement(Position root, int number)
+Position DeleteElement(Position root, int number)
 {
 	Position temp = NULL;
 
-	if (!root)
+	if (root == NULL)
 		return root;
 
 	else if (number < root->number)
-		root->left = DeleteElement(number, root->left);
+		root->left = DeleteElement(root->left, number);
 
 	else if (number > root->number)
-		root->right = DeleteElement(number, root->right);
+		root->right = DeleteElement(root->right, number);
 
 	else
 	{
@@ -162,15 +168,19 @@ int DeleteElement(Position root, int number)
 		{
 			temp = FindMin(root->right);
 			root->number = temp->number;
-			root->right = DeleteElement(temp->number, root->right);
+			root->right = DeleteElement(root->right, root->number);
 		}
+
 		else
 		{
 			temp = root;
-			if (!root->left)
+
+			if (root->left == NULL)
 				root = root->right;
-			else if (!root->right)
+
+			else
 				root = root->left;
+
 			free(temp);
 		}
 	}
@@ -183,10 +193,13 @@ Position FindElement(Position root, int number)
 {
 	if (root == NULL)
 		return NULL;
+
 	else if (number < root->number)
 		return FindElement(root->left, number);
+
 	else if (number > root->number)
 		return FindElement(root->right, number);
+
 	else
 		return root;
 }
@@ -195,8 +208,10 @@ Position FindMin(Position root)
 {
 	if (root == NULL)
 		return NULL;
+
 	else if (root->left == NULL)
 		return root;
+
 	else
 		return FindMin(root->left);
 }

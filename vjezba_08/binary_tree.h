@@ -17,7 +17,7 @@ Position Insert(Position root, Position NewElement);
 int PrintInorder(Position root);
 int PrintPreorder(Position root);
 int PrintPostorder(Position root);
-int DeleteElement(Position root, int number);
+Position DeleteElement(Position root, int number);
 Position FindElement(Position root, int number);
 Position FindMin(Position root);
 
