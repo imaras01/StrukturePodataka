@@ -19,6 +19,7 @@ typedef struct _stack
 }StackElement;
 
 Position CreateNewTreeElement(int number);
+Position FillTree(Position root);
 Position Insert(Position root, Position NewElement);
 int SortInOrder(Position root, StackPosition head);
 Position Replace(Position root);
@@ -26,7 +27,11 @@ int CalculateSum(Position root, int* sum);
 int Push(StackPosition head, int number);
 StackPosition CreateNewStackElement(int number);
 int WriteInFile(StackPosition head, char* filename);
-int DeleteStack(StackPosition head);
+int DeleteAfter(StackPosition head);
+int Pop(StackPosition head);
+Position DeleteTree(Position root);
+Position FillRandomTree(Position root);
+
 
 
 #endif

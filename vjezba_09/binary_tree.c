@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 #include "binary_tree.h"
 
 Position CreateNewTreeElement(int number)
@@ -112,26 +113,80 @@ int WriteInFile(StackPosition head, char* filename)
 	}
 
 	while (head->next)
-	{
-		fprintf(file, "%d ", head->next->number);
-		head = head->next;
-	}
+		fprintf(file, "%d ", Pop(head));
 
 	fclose(file);
-	DeleteStack(head);
 	return 0;
 }
 
-int DeleteStack(StackPosition head)
+int DeleteAfter(StackPosition head)
 {
 	StackPosition temp = NULL;
 
-	while (head->next)
-	{
-		temp = head->next;
-		head->next = temp->next;
-		free(temp);
-	}
+	temp = head->next;
+	head->next = temp->next;
+	free(temp);
 
 	return 0;
+}
+
+int Pop(StackPosition head)
+{
+	int number = head->next->number;
+
+	DeleteAfter(head);
+
+	return number;
+}
+
+Position FillTree(Position root)
+{
+	Position NewElement = NULL;
+	int numbers[10] = { 2, 5, 7, 8, 11, 1, 4, 2, 3, 7 };
+	int i = 0;
+
+	for (i = 0; i < 10; i++)
+	{
+		NewElement = CreateNewTreeElement(numbers[i]);
+		if (!NewElement)
+			return -1;
+
+		root = Insert(root, NewElement);
+	}
+
+	return root;
+}
+
+Position DeleteTree(Position root)
+{
+	if (root->left)
+		root->left = DeleteTree(root->left);
+
+	if (root->right)
+		root->right = DeleteTree(root->right);
+
+	free(root);
+
+	return NULL;
+}
+
+Position FillRandomTree(Position root)
+{
+	Position NewElement = NULL;
+	int numbers[10] = { 0 };
+	int i = 0;
+
+	srand(time(NULL));
+
+	for (i = 0; i < 10; i++)
+	{
+		numbers[i] = rand() % 81 + 10;
+		NewElement = CreateNewTreeElement(numbers[i]);
+		if (!NewElement)
+			return -1;
+
+		root = Insert(root, NewElement);
+	}
+
+	return root;
 }
