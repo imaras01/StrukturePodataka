@@ -1,0 +1,3 @@
+Berlin 3500000
+Stuttgart 7000000
+Frankfurt 7000000
