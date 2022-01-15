@@ -1,3 +1,5 @@
-﻿  main.c
+﻿  linked_list.c
+  main.c
 C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_10\main.c(24,13): warning C4013: 'strcmp' undefined; assuming extern returning int
+  Generating Code...
   vjezba_10.vcxproj -> C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_10\x64\Debug\vjezba_10.exe

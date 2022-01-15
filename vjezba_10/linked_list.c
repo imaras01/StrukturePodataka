@@ -125,6 +125,16 @@ TreePosition InsertInTree(TreePosition root, TreePosition NewElement)
 	else if (NewElement->population < root->population)
 		root->left = InsertInTree(root->left, NewElement);
 
+	else
+	{
+		if(strcmp(NewElement->name, root->name)<0)
+			root->left = InsertInTree(root->left, NewElement);
+		
+		else if(strcmp(NewElement->name, root->name)>0)
+			root->right = InsertInTree(root->right, NewElement);
+		
+	}
+
 	return root;
 }
 
