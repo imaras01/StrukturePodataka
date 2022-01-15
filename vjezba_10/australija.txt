@@ -1,0 +1,4 @@
+Melbourne 4000000
+Perth 1800000
+Adelaide 1250000
+Hobart 200000
