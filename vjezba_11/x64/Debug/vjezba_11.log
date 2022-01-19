@@ -1,4 +1,5 @@
 ﻿  hash_table.c
   main.c
+C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_11\main.c(25,13): warning C4013: 'strcmp' undefined; assuming extern returning int
   Generating Code...
   vjezba_11.vcxproj -> C:\Users\Ivan Marasovic\Documents\Strukture Podataka Vjezbe\StrukturePodataka\vjezba_11\x64\Debug\vjezba_11.exe

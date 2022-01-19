@@ -31,6 +31,8 @@ int InsertInTable(ListPosition head, ListPosition NewElement);
 int FillTrees(ListPosition NewElement, char* filename);
 TreePosition CreateNewTreeElement(char name[], int population);
 TreePosition InsertInTree(TreePosition root, TreePosition NewElement);
+ListPosition SearchCountry(ListPosition head, char search[]);
+int SearchTree(TreePosition root, int reference_number);
 int CalculateHash(char name[]);
 
 

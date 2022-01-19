@@ -140,6 +140,40 @@ TreePosition InsertInTree(TreePosition root, TreePosition NewElement)
 	return root;
 }
 
+ListPosition SearchCountry(ListPosition head, char search[])
+{
+	while (head->next != NULL)
+	{
+		if (strcmp(search, head->next->name) == 0)
+			return head->next;
+
+		head = head->next;
+	}
+
+	puts("");
+	printf("Searched country doesn't exist. Please try again.\n");
+
+	return NULL;
+}
+
+int SearchTree(TreePosition root, int reference_number)
+{
+	if (root == NULL)
+		return 0;
+
+	else if (root->population > reference_number)
+	{
+		SearchTree(root->left, reference_number);
+		printf("%s %d\n", root->name, root->population);
+		SearchTree(root->right, reference_number);
+	}
+
+	else if (root->population < reference_number)
+		SearchTree(root->right, reference_number);
+
+	return 0;
+}
+
 int CalculateHash(char name[])
 {
 	int sum = 0;
