@@ -38,5 +38,7 @@ int main()
 
 	} while (1);
 
+	FreeMemory(hash_table);
+
 	return 0;
 }

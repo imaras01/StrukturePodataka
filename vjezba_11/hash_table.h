@@ -34,9 +34,9 @@ TreePosition InsertInTree(TreePosition root, TreePosition NewElement);
 ListPosition SearchCountry(ListPosition head, char search[]);
 int SearchTree(TreePosition root, int reference_number);
 int CalculateHash(char name[]);
-
-
-
+int FreeMemory(Country hash_table[]);
+int DeleteList(ListPosition head);
+TreePosition DeleteTree(TreePosition root);
 
 
 #endif

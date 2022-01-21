@@ -186,3 +186,46 @@ int CalculateHash(char name[])
 
 	return sum % 11;
 }
+
+int FreeMemory(Country hash_table[])
+{
+	int i = 0;
+	for (i = 0; i < 11; i++)
+	{
+		DeleteList(&hash_table[i]);
+	}
+
+	return 0;
+}
+
+int DeleteList(ListPosition head)
+{
+	ListPosition temp = NULL;
+
+	while (head->next != NULL)
+	{
+		temp = head->next;
+		temp->root = DeleteTree(temp->root);
+		
+		head->next = temp->next;
+		free(temp);
+	}
+
+	return 0;
+}
+
+TreePosition DeleteTree(TreePosition root)
+{
+	if (root == NULL)
+		return NULL;
+
+	if (root->left)
+		root->left = DeleteTree(root->left);
+
+	if (root->right)
+		root->right = DeleteTree(root->right);
+
+	free(root);
+
+	return NULL;
+}
